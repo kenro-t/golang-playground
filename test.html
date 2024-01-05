@@ -1,0 +1,16 @@
+<script>
+    (async () => {
+        const url = "http://127.0.0.1:8080/albums/1";
+        const params = {
+            method: "GET",
+            mode: 'cors',
+            credentials: 'omit',
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin":"*"
+            }
+        };
+        const response = await fetch(url, params);
+        console.log(await response.json());
+    })();
+</script>

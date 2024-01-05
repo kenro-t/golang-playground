@@ -3,6 +3,7 @@ package main
 import (
     "net/http"
     "github.com/gin-gonic/gin"
+	"github.com/gin-contrib/cors"
 )
 
 type album struct {
@@ -47,6 +48,11 @@ func postAlbums(c *gin.Context) {
 
 func main() {
     router := gin.Default()
+	router.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"*"},
+		AllowHeaders: []string{"*"},
+	}))
+
     router.GET("/albums", getAlbums)
 	router.GET("/albums/:id", getAlbumByID)
     router.POST("/albums", postAlbums)
