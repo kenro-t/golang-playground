@@ -4,6 +4,7 @@ import (
     "net/http"
     "github.com/gin-gonic/gin"
 	"github.com/gin-contrib/cors"
+	"fmt"
 )
 
 type album struct {
@@ -11,6 +12,10 @@ type album struct {
 	Title string `json:"title`
 	Artist string `json:"artist`
 	Price float64 `json:"price`
+}
+
+type test struct {
+	test string 
 }
 
 var albums = []album{
@@ -46,6 +51,36 @@ func postAlbums(c *gin.Context) {
     c.IndentedJSON(http.StatusCreated, newAlbum)
 }
 
+// フィールド名は大文字で始めないとdecode encodeされない
+type JsonRequest struct {
+	Test  string `json:"test"`
+}
+func postJsonTest(c *gin.Context) {
+
+	var postJson JsonRequest
+	if err := c.ShouldBindJSON(&postJson); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	
+	c.JSON(http.StatusOK, gin.H{"test": postJson.Test})
+    // c.IndentedJSON(http.StatusOK, gin.H{"message": message})
+}
+
+func postFormTest(c *gin.Context) {
+    var newTest test
+
+	
+    if err := c.ShouldBind(&newTest); err != nil {
+        // return
+    }
+	s := c.PostForm("test")
+	message := fmt.Sprintf("%v", s)
+	
+    c.IndentedJSON(http.StatusOK, gin.H{"message": message})
+}
+
+
 func main() {
     router := gin.Default()
 	router.Use(cors.New(cors.Config{
@@ -56,6 +91,8 @@ func main() {
     router.GET("/albums", getAlbums)
 	router.GET("/albums/:id", getAlbumByID)
     router.POST("/albums", postAlbums)
+	router.POST("/post-form-test", postFormTest)
+	router.POST("/post-json-test", postJsonTest)
     router.Run("localhost:8080")
 }
 
@@ -65,4 +102,5 @@ func main() {
 対象パスの依存関係を解消する
 go get パス
 
+jsonで値を受け取る時、structのフィールド名は大文字で始めないとdecode encodeされない
 */
