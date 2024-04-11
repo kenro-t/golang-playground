@@ -1,7 +1,8 @@
 version: '3'
 services:
   golang:
-    image: golang:1.19.11-alpine
+    # image: golang:1.19.11-alpine
+    image: golang:latest
     ports:
       - 8080:80
     volumes:
