@@ -1,5 +1,5 @@
 package main
-
+/*
 import "fmt"
 
 // 関数の外では省略形で書くことができない
@@ -18,3 +18,4 @@ func main () {
 	const hoge = "aaa"
 	fmt.Println(hoge)
 }
+*/

@@ -1,5 +1,5 @@
 package main
-
+/*
 import "fmt"
 
 // 引数の型は同じ場合まとめて定義できる
@@ -22,3 +22,4 @@ func main () {
 	fmt.Println(add2(123, 321, "111"))
 	fmt.Println(multiReturn(123, 321))
 }
+*/
