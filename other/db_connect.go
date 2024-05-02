@@ -1,9 +1,9 @@
 package main
 
 import (
-	"database/sql"
-	"fmt"
-	"log"
+	// "database/sql"
+	// "fmt"
+	// "log"
 
 	_ "github.com/lib/pq"
 )
@@ -14,6 +14,7 @@ type Test struct {
 	col3 int
 }
 
+/*
 func main() {
 	// PostgreSQL接続情報
 	db, err := sql.Open("postgres", "host=postgres user=test password='password' dbname=testdb sslmode=disable")
@@ -43,7 +44,7 @@ func main() {
 
 	fmt.Println(test)
 }
-
+*/
 
 /*
 備忘録
