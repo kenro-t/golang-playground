@@ -11,9 +11,16 @@ services:
       - db
     restart: always  
     init: true
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_TCP_PORT: 3306
+      MYSQL_HOST: mysqlhost # 接続先dbのcontainer_nameと一致させる必要がある
+      MYSQL_DATABASE: mvc
+      MYSQL_USER: mvc
+      MYSQL_PASSWORD: password
   db:
     image: mysql:latest
-    container_name: mysql
+    container_name: mysqlhost
     ports:
       - 3306:3306
     volumes:
