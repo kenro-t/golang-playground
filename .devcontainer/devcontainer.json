@@ -7,5 +7,12 @@
 		"docker-from-docker": {
 			"version": "latest"
 		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"golang.go"
+			]
+		}
 	}
   }
