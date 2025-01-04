@@ -8,10 +8,19 @@
 			"version": "latest"
 		}
 	},
+	"mounts": [
+    	"source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind,consistency=cached"
+  	],
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"golang.go"
+				"golang.go",
+				"streetsidesoftware.code-spell-checker",
+				"eamodio.gitlens",
+				"ms-azuretools.vscode-docker",
+				"esbenp.prettier-vscode",
+				"redhat.vscode-yaml",
+				"github.copilot"
 			]
 		}
 	}
