@@ -5,16 +5,14 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	"golang.org/x/sync/errgroup"
 )
 
 func main() {
 	if err := run(context.Background()); err != nil {
 		log.Printf("Error: %v", err)
 	}
-
-	// if err != nil {
-	// 	fmt.Printf("failed to start server: %v", err)
-	// }
 }
 
 func run(ctx context.Context) error {
@@ -25,7 +23,21 @@ func run(ctx context.Context) error {
 		}),
 	}
 
-	s.ListenAndServe()
+	eg, ctx := errgroup.WithContext(ctx)
 
-	return nil
+	eg.Go(func() error {
+		if err := s.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Printf("failed to close %v", err)
+			return err
+		}
+		return nil
+	})
+
+	<-ctx.Done()
+	if err := s.Shutdown(context.Background()); err != nil {
+		log.Printf("failed to shutdown %v", err)
+		return err
+	}
+
+	return eg.Wait()
 }
