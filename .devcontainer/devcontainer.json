@@ -2,12 +2,13 @@
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "golang",
 	// "workspaceFolder": "/workspace/${localWorkspaceFolderBasename}",
-	"workspaceFolder": "/workspace/golang",
+	"workspaceFolder": "/app/go",
 	"features": {
 		"docker-from-docker": {
 			"version": "latest"
 		}
 	},
+	"postCreateCommand": "go install github.com/go-delve/delve/cmd/dlv@latest",
 	"mounts": [
 		"source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind,consistency=cached"
 	],

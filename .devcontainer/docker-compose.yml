@@ -5,7 +5,7 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ..:/workspace/golang
+      - ..:/app/go
     tty: true
     depends_on:
       - db
