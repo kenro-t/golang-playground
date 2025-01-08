@@ -9,7 +9,7 @@ services:
     tty: true
     depends_on:
       - db
-    restart: always  
+    # restart: always
     init: true
     environment:
       MYSQL_ROOT_PASSWORD: password
