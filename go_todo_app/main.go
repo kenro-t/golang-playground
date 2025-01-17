@@ -2,8 +2,11 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"go_todo_app/config"
 	"log"
+	"net"
+	"net/http"
 )
 
 func main() {
@@ -11,9 +14,17 @@ func main() {
 	if err != nil {
 		log.Printf("Error: %v", err)
 	}
-	cfg.Port
+
+	l, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", cfg.Port))
+	if err != nil {
+		log.Printf("Error: %v", err)
+	}
+	mux := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Hello %s, World!", r.URL.Path[1:])
+	})
+
 	s := NewServer(l, mux)
-	if err := Run(context.Background()); err != nil {
+	if err := s.Run(context.Background()); err != nil {
 		log.Printf("Error: %v", err)
 	}
 }
