@@ -7,7 +7,7 @@ import (
 )
 
 type ListTask struct {
-	store *store.TaskStore
+	Store *store.TaskStore
 }
 
 type task struct {
@@ -18,7 +18,7 @@ type task struct {
 
 func (lt *ListTask) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	tasks := lt.store.All()
+	tasks := lt.Store.All()
 
 	rsp := []task{}
 	for _, t := range tasks {
