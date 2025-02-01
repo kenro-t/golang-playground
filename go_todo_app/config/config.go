@@ -8,7 +8,10 @@ type Config struct {
 }
 
 func New() (*Config, error) {
-	cfg := &Config{}
+	cfg := &Config{
+		Env:  "dev",
+		Port: 18000,
+	}
 	if err := env.Parse(cfg); err != nil {
 		return nil, err
 	}
